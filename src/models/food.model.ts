@@ -1,7 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 
 type FoodSchemaType = {
-  categoryName: string;
+  foodName: string;
+  price: number;
+  image: string;
+  ingredients: string;
+  category: Schema.Types.ObjectId;
 };
 
 const FoodSchema: Schema = new Schema(
