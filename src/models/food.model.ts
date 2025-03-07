@@ -23,4 +23,4 @@ const FoodSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<FoodSchemaType>("food", FoodSchema);
+export default mongoose.model<FoodSchemaType>("foods", FoodSchema);

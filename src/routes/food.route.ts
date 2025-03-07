@@ -1,8 +1,17 @@
 import express from "express";
-import { createFood, fixFood } from "../controllers/food.controller";
+import {
+  createFood,
+  fixFood,
+  getAppetizers,
+  getFood,
+} from "../controllers/food.controller";
 
 const foodRoute = express.Router();
 
-foodRoute.post("/", createFood).put("/", fixFood);
+foodRoute
+  .post("/", createFood)
+  .get("/", getFood)
+  .put("/", fixFood)
+  .get("/:foodId", getAppetizers);
 
 export default foodRoute;

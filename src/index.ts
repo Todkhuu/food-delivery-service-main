@@ -15,7 +15,7 @@ app.use(cors());
 const port = process.env.PORT;
 
 app.use("/food_category", categoryRoute);
-app.use("/food", foodRoute);
+app.use("/foods", foodRoute);
 
 app.listen(port, () => {
   console.log(`Port is starting ${port}`);

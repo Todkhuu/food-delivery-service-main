@@ -11,6 +11,29 @@ export const createFood: RequestHandler = async (req, res) => {
   }
 };
 
+export const getFood: RequestHandler = async (req, res) => {
+  try {
+    const allFoods = await foodModel.find();
+    res.status(200).json({ message: "All Foods", data: allFoods });
+  } catch (error) {
+    res.status(500).json({ message: "Error", error });
+  }
+};
+
+export const getAppetizers: RequestHandler = async (req, res) => {
+  try {
+    const { foodId } = req.params;
+    const allFoods = await foodModel.find();
+    const appetizers = allFoods.filter(
+      (food) => String(food.category) == String(foodId)
+    );
+    console.log("app", allFoods);
+    res.status(200).json({ message: "App", data: appetizers });
+  } catch (error) {
+    res.status(500).json({ message: "Error", error });
+  }
+};
+
 export const fixFood: RequestHandler = async (req, res) => {
   try {
     const { foodId } = req.params;
