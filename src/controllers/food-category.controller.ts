@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import foodCategoryModel from "../models/food-category.model";
+import foodModel from "../models/food.model";
 
 export const createFoodCategory: RequestHandler = async (req, res) => {
   try {
@@ -41,5 +42,18 @@ export const deleteFoodCategories: RequestHandler = async (req, res) => {
     res.status(200).json({ message: "Successfully deleted FoodCategory" });
   } catch (error) {
     res.status(500).json({ message: "Error in deleteFoodCategory", error });
+  }
+};
+
+export const allFoodCat: RequestHandler = async (req, res) => {
+  try {
+    const allFoods = await foodModel.find();
+    const allCategory = await foodCategoryModel.find();
+    const all = allCategory.filter((cat) =>
+      allFoods.some((food) => String(cat._id) == String(food.category))
+    );
+    res.status(200).json({ message: "Successfully", data: all });
+  } catch (error) {
+    res.status(500).json({ message: "Error in allFoodCat", error });
   }
 };

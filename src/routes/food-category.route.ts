@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  allFoodCat,
   createFoodCategory,
   deleteFoodCategories,
   fixFoodCategories,
@@ -12,6 +13,7 @@ categoryRoute
   .post("/", createFoodCategory)
   .get("/", getFoodCategories)
   .put("/", fixFoodCategories)
-  .delete("/", deleteFoodCategories);
+  .delete("/", deleteFoodCategories)
+  .get("/a", allFoodCat);
 
 export default categoryRoute;
