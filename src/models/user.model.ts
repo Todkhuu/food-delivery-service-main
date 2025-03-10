@@ -31,4 +31,4 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<UserSchemaType>("user", UserSchema);
+export default mongoose.model<UserSchemaType>("auth", UserSchema);
