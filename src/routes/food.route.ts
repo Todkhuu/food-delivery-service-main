@@ -11,7 +11,7 @@ const foodRoute = express.Router();
 foodRoute
   .post("/", createFood)
   .get("/", getFood)
-  .put("/", fixFood)
+  .put("/:foodId", fixFood)
   .get("/:foodId", getAppetizers);
 
 export default foodRoute;

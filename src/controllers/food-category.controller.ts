@@ -17,7 +17,21 @@ export const createFoodCategory: RequestHandler = async (req, res) => {
 export const getFoodCategories: RequestHandler = async (req, res) => {
   try {
     const allCategory = await foodCategoryModel.find();
-    res.status(200).json({ message: "All FoodCategory", data: allCategory });
+
+    const categoryWithFoodCount = await Promise.all(
+      allCategory.map(async (category) => {
+        const foods = await foodModel.find({ category: category._id });
+        return {
+          _id: category._id,
+          categoryName: category.categoryName,
+          count: foods.length,
+        };
+      })
+    );
+    console.log(categoryWithFoodCount);
+    res
+      .status(200)
+      .json({ message: "All FoodCategory", data: categoryWithFoodCount });
   } catch (error) {
     res.status(500).json({ message: "Error in getFoodCategory", error });
   }
@@ -42,18 +56,5 @@ export const deleteFoodCategories: RequestHandler = async (req, res) => {
     res.status(200).json({ message: "Successfully deleted FoodCategory" });
   } catch (error) {
     res.status(500).json({ message: "Error in deleteFoodCategory", error });
-  }
-};
-
-export const allFoodCat: RequestHandler = async (req, res) => {
-  try {
-    const allFoods = await foodModel.find();
-    const allCategory = await foodCategoryModel.find();
-    const all = allCategory.filter((cat) =>
-      allFoods.some((food) => String(cat._id) == String(food.category))
-    );
-    res.status(200).json({ message: "Successfully", data: all });
-  } catch (error) {
-    res.status(500).json({ message: "Error in allFoodCat", error });
   }
 };
