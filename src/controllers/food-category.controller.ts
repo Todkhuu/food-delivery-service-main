@@ -28,10 +28,10 @@ export const getFoodCategories: RequestHandler = async (req, res) => {
         };
       })
     );
-    console.log(categoryWithFoodCount);
-    res
-      .status(200)
-      .json({ message: "All FoodCategory", data: categoryWithFoodCount });
+    res.status(200).json({
+      message: "All FoodCategory",
+      data: categoryWithFoodCount,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error in getFoodCategory", error });
   }
@@ -39,8 +39,13 @@ export const getFoodCategories: RequestHandler = async (req, res) => {
 
 export const fixFoodCategories: RequestHandler = async (req, res) => {
   try {
+    const { _id } = req.params;
     const categoryData = req.body;
-    const updateCategory = await foodCategoryModel.updateOne(categoryData);
+    console.log(_id, categoryData);
+    const updateCategory = await foodCategoryModel.updateOne(
+      { _id: _id },
+      categoryData
+    );
     res
       .status(201)
       .json({ message: "Successfully fixed FoodCategory", updateCategory });
@@ -51,8 +56,8 @@ export const fixFoodCategories: RequestHandler = async (req, res) => {
 
 export const deleteFoodCategories: RequestHandler = async (req, res) => {
   try {
-    const categoryData = req.body;
-    const deleteCategory = await foodCategoryModel.deleteOne(categoryData);
+    const { _id } = req.params;
+    const deleteCategory = await foodCategoryModel.deleteOne({ _id });
     res.status(200).json({ message: "Successfully deleted FoodCategory" });
   } catch (error) {
     res.status(500).json({ message: "Error in deleteFoodCategory", error });
