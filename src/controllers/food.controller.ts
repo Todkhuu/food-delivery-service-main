@@ -13,6 +13,7 @@ export const createFood: RequestHandler = async (req, res) => {
 
 export const getFood: RequestHandler = async (req, res) => {
   try {
+    // const { foodId } = req.params;
     const allFoods = await foodModel.find();
     res.status(200).json({ message: "All Foods", data: allFoods });
   } catch (error) {
