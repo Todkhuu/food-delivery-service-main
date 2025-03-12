@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createFood,
+  deleteFood,
   fixFood,
   getAppetizers,
   getFood,
@@ -8,10 +9,10 @@ import {
 
 const foodRoute = express.Router();
 
-foodRoute
-  .post("/", createFood)
-  .get("/", getFood)
-  .put("/:foodId", fixFood)
-  .get("/:foodId", getAppetizers);
+foodRoute.post("/", createFood);
+foodRoute.get("/", getFood);
+foodRoute.put("/:foodId", fixFood);
+foodRoute.get("/:foodId", getAppetizers);
+foodRoute.delete("/:foodId", deleteFood);
 
 export default foodRoute;
