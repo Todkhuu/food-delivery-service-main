@@ -13,7 +13,7 @@ export const createFood: RequestHandler = async (req, res) => {
   }
 };
 
-export const getFood: RequestHandler = async (req, res) => {
+export const getFoods: RequestHandler = async (req, res) => {
   try {
     // const { categoryId } = req.params;
     // if (categoryId) {
@@ -21,7 +21,7 @@ export const getFood: RequestHandler = async (req, res) => {
     //   res.status(200).json({ message: "All Foods", data: allFoods });
     //   return;
     // }
-    const allFoods = await foodModel.find();
+    const allFoods = await foodModel.find().populate("category");
     res.status(200).json({ message: "All Foods", data: allFoods });
   } catch (error) {
     res.status(500).json({ message: "Error", error });
@@ -57,10 +57,11 @@ export const fixFood: RequestHandler = async (req, res) => {
 export const deleteFood: RequestHandler = async (req, res) => {
   try {
     const { foodId } = req.params;
-    const updateCategory = await foodModel.deleteOne({ foodId });
+    console.log(foodId);
+    const deleteCategory = await foodModel.deleteOne({ _id: foodId });
     res
       .status(200)
-      .json({ message: "Successfully deleted Food", updateCategory });
+      .json({ message: "Successfully deleted Food", deleteCategory });
   } catch (error) {
     res.status(500).json({ message: "Error in deleteFood", error });
   }
