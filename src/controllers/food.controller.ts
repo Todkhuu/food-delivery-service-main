@@ -28,7 +28,7 @@ export const getFoods: RequestHandler = async (req, res) => {
   }
 };
 
-export const getAppetizers: RequestHandler = async (req, res) => {
+export const getOneFood: RequestHandler = async (req, res) => {
   try {
     const { foodId } = req.params;
     const allFoods = await foodModel.find({ category: foodId });
