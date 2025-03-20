@@ -14,7 +14,7 @@ export const resetPassword: RequestHandler = async (req, res) => {
     const { password, token } = req.body;
 
     if (!token) {
-      res.status(400).json({ message: "Email oruulna uu" });
+      res.status(400).json({ message: "Token bhgu bn" });
       return;
     }
 

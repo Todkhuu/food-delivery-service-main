@@ -21,7 +21,9 @@ export const signIn: RequestHandler = async (req, res) => {
     const isCorrect = compareSync(password, user.password);
 
     if (!isCorrect) {
-      res.status(401).json({ message: "Password is wrong!", error: true });
+      res
+        .status(401)
+        .json({ message: "Password is wrong!", data: user, error: true });
       return;
     }
 

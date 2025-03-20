@@ -28,11 +28,11 @@ export const forgetPassword: RequestHandler = async (req, res) => {
     console.log("jwt-secret", jwtSecret);
 
     const token = jwt.sign({ id: user._id }, jwtSecret!, { expiresIn: "1h" });
-    console.log("token", token);
+    // console.log("token", token);
 
     await sendEmail(email, token);
 
-    res.status(200).json({ message: "amjilttai" });
+    res.status(200).json({ message: "amjilttai", data: user });
   } catch (error) {
     res.status(500).json({ message: "aldaa garlaa", error });
   }
