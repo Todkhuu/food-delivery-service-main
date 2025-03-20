@@ -13,7 +13,9 @@ export const createFoodOrder: RequestHandler = async (req, res) => {
 
 export const getFoodOrder: RequestHandler = async (req, res) => {
   try {
-    const foodOrders = await foodOrderModel.find().populate("user", "food");
+    const foodOrders = await foodOrderModel
+      .find()
+      .populate(["user", "foodOrderItems.food"]);
     res
       .status(200)
       .json({ message: "Successfully get Food-Order", data: foodOrders });
