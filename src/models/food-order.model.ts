@@ -17,7 +17,7 @@ const FoodOrderSchema: Schema = new Schema(
         quantity: { type: Number, required: true },
       },
     ],
-    status: ["PENDING", "CANCELED", "DELIVERED"],
+    status: { type: ["PENDING", "CANCELED", "DELIVERED"], default: "PENDING" },
   },
   { timestamps: true }
 );

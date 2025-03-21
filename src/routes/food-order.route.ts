@@ -10,6 +10,7 @@ const foodOrderRoute = Router();
 foodOrderRoute
   .post("", createFoodOrder)
   .get("", getFoodOrder)
+  .get("/:userId", getFoodOrder)
   .put("/:id", fixFood);
 
 export default foodOrderRoute;
