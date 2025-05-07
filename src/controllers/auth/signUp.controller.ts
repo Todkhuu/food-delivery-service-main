@@ -18,9 +18,7 @@ export const signUp: RequestHandler = async (req, res) => {
       password: hashedPassword,
     });
 
-    res
-      .status(200)
-      .json({ message: "Hereglegch amjilttai burtgegdlee", data: createUser });
+    res.status(200).json({ message: "Register succesfully", data: createUser });
   } catch (error) {
     res.status(500).json({ message: "Error in getSignInUser" });
   }
