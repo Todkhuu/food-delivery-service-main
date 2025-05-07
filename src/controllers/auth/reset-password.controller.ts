@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import userModel from "../../models/user.model";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { sendEmail } from "../../util/send-eamil";
 import { configDotenv } from "dotenv";
 import { hashSync } from "bcryptjs";
 
@@ -14,7 +13,7 @@ export const resetPassword: RequestHandler = async (req, res) => {
     const { password, token } = req.body;
 
     if (!token) {
-      res.status(400).json({ message: "Token bhgu bn" });
+      res.status(400).json({ message: "Token is missing" });
       return;
     }
 
@@ -27,10 +26,11 @@ export const resetPassword: RequestHandler = async (req, res) => {
       password: hashedPassword,
     });
 
-    res
-      .status(200)
-      .json({ message: "Tanii pass amjilttai soligdlo", data: user });
+    res.status(200).json({
+      message: "Your password has been successfully updated",
+      data: user,
+    });
   } catch (error) {
-    res.status(500).json({ message: "aldaa garlaa", error });
+    res.status(500).json({ message: "An error occurred", error });
   }
 };
