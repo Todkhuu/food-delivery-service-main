@@ -9,7 +9,7 @@ const userRoute = Router();
 
 userRoute.post("/signup", signUp);
 userRoute.post("/signin", signIn);
-userRoute.get("/me", me);
+userRoute.get("/me/:id", me);
 userRoute.post("/reset-password-request", forgetPassword);
 userRoute.post("/reset-password", resetPassword);
 
